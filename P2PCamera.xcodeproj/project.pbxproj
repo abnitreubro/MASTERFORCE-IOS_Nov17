@@ -1190,15 +1190,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Reubro International (DQTX7SGDK4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reubro International (DQTX7SGDK4)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
 				SDKROOT = iphoneos;
 			};
 			name = distribute;
@@ -1233,8 +1233,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.reubro.menards;
 				PRODUCT_NAME = P2PCamera;
-				PROVISIONING_PROFILE = "4abaefc0-a807-464a-80c0-24b00bfd30ec";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4abaefc0-a807-464a-80c0-24b00bfd30ec";
+				PROVISIONING_PROFILE = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7";
@@ -1277,8 +1277,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.reubro.menards;
 				PRODUCT_NAME = P2PCamera;
-				PROVISIONING_PROFILE = "daa951d1-2667-40b3-87c3-3f9f4454c448";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "daa951d1-2667-40b3-87c3-3f9f4454c448";
+				PROVISIONING_PROFILE = "cb6c3684-8207-496e-b21b-4e5450612ef9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "cb6c3684-8207-496e-b21b-4e5450612ef9";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7";
@@ -1315,8 +1315,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.reubro.menards;
 				PRODUCT_NAME = P2PCamera;
-				PROVISIONING_PROFILE = "4abaefc0-a807-464a-80c0-24b00bfd30ec";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4abaefc0-a807-464a-80c0-24b00bfd30ec";
+				PROVISIONING_PROFILE = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7";
@@ -1335,7 +1335,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "daa951d1-2667-40b3-87c3-3f9f4454c448";
+				PROVISIONING_PROFILE = "cb6c3684-8207-496e-b21b-4e5450612ef9";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1344,14 +1344,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Reubro International (DQTX7SGDK4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Reubro International (DQTX7SGDK4)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fe4ecd9d-cb0e-4aac-ac80-a3975ad9fd09";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

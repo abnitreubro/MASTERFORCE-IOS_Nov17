@@ -1031,7 +1031,7 @@ Wi-Fi Inspection Camera/Video</string>
     <resources>
         <image name="Camera_NotClicked.png" width="44" height="43"/>
         <image name="LeftRotate.png" width="138" height="123"/>
-        <image name="MASTERFORCE ICON 1024 x 1024.PNG" width="1024" height="1024"/>
+        <image name="MASTERFORCE ICON 1024 x 1024.PNG" width="512" height="512"/>
         <image name="Play.png" width="169" height="170"/>
         <image name="Plus 2.png" width="512" height="512"/>
         <image name="Square.png" width="153" height="154"/>

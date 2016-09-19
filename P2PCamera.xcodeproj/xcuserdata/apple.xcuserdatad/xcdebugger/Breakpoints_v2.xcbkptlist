@@ -31,8 +31,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1102"
             endingLineNumber = "1102"
-            landmarkName = "-YUVNotify:length:width:height:timestamp:StreamID:"
-            landmarkType = "5">
+            landmarkName = "@implementation PlayViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,8 +63,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "750"
             endingLineNumber = "750"
-            landmarkName = "-CreateGLView"
-            landmarkType = "5">
+            landmarkName = "@implementation PlayViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
