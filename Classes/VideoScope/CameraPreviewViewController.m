@@ -456,7 +456,7 @@ static NSData *_endMarkerData = nil;
     mesageLabel.alpha = 1;
     mesageLabel.text = @"Snapshot saved successfully";
     
-    [UIView animateWithDuration:2.5 animations:^{
+    [UIView animateWithDuration:5.0 animations:^{
         
         mesageLabel.alpha = 0;
     }];
@@ -969,7 +969,7 @@ static NSData *_endMarkerData = nil;
                             mesageLabel.alpha = 1;
                             mesageLabel.text = @"Video saved successfully";
                             
-                            [UIView animateWithDuration:2.5 animations:^{
+                            [UIView animateWithDuration:5.0 animations:^{
                                 
                                 mesageLabel.alpha = 0;
                             }];
@@ -1226,7 +1226,7 @@ static NSData *_endMarkerData = nil;
              mesageLabel.alpha = 1;
              mesageLabel.text = @"Video saved successfully";
              
-             [UIView animateWithDuration:2.5 animations:^{
+             [UIView animateWithDuration:5.0 animations:^{
                  
                  mesageLabel.alpha = 0;
              }];

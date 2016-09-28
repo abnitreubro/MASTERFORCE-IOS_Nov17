@@ -560,7 +560,7 @@
     messageLabel.alpha = 1;
     messageLabel.text = @"Snapshot saved successfully";
     
-    [UIView animateWithDuration:2.5 animations:^{
+    [UIView animateWithDuration:5.0 animations:^{
         
         messageLabel.alpha = 0;
     }];
@@ -1671,7 +1671,7 @@
                                     messageLabel.alpha = 1;
                                     messageLabel.text = @"Video saved successfully";
                                     
-                                    [UIView animateWithDuration:2.5 animations:^{
+                                    [UIView animateWithDuration:5.0 animations:^{
                                         
                                         messageLabel.alpha = 0;
                                     }];
@@ -1970,7 +1970,7 @@
                      messageLabel.alpha = 1;
                      messageLabel.text = @"Video saved successfully";
                      
-                     [UIView animateWithDuration:2.5 animations:^{
+                     [UIView animateWithDuration:5.0 animations:^{
                          
                          messageLabel.alpha = 0;
                      }];
