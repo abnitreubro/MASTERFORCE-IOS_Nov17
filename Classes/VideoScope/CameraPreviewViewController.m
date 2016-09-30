@@ -44,7 +44,7 @@ static NSData *_endMarkerData = nil;
     
     [self.view layoutIfNeeded];
     
-    self.navigationItem.title=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+    self.navigationItem.title=@"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
     [self.activityIndicatorView startAnimating];
     
     

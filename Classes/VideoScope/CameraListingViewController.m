@@ -110,12 +110,12 @@
         NSLog(@"No Wifi Connected");
         if (indexPath.row==0)
         {
-            cell.cameraName.text= @"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+            cell.cameraName.text= @"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
             cell.cameraImage.image = [UIImage imageNamed:@"MX1020-200"];
         }
         else
         {
-            cell.cameraName.text=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+            cell.cameraName.text=@"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
             cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
         }
         cell.userInteractionEnabled=NO;
@@ -126,7 +126,7 @@
         if ([sSIDName isEqualToString:@"Masterforce_MX1020_Inspec_Camera"] || [sSIDName isEqualToString:@"CAM9B1F"] || [sSIDName isEqualToString:@"Masterforce _MX1020_Inspec_camera"] || [sSIDName isEqualToString:@"Masterforce_MX1020_Inspec_camera"]) {
             if (indexPath.row==0)
             {
-                cell.cameraName.text= @"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+                cell.cameraName.text= @"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1020-200"];
                 cell.userInteractionEnabled=YES;
                 cell.cameraName.enabled=YES;
@@ -134,7 +134,7 @@
             }
             else
             {
-                cell.cameraName.text=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+                cell.cameraName.text=@"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
                 cell.userInteractionEnabled = NO;
                 cell.cameraName.enabled = NO;
@@ -144,7 +144,7 @@
         else if ([sSIDName isEqualToString:@"Masterforce_MX1021_Inspec_Camera"]||[sSIDName isEqualToString:@"Steelman_PRO_Video_Scope"]) {
             if (indexPath.row==0)
             {
-                cell.cameraName.text= @"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+                cell.cameraName.text= @"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1020-200"];
                 cell.userInteractionEnabled=NO;
                 cell.cameraName.enabled=NO;
@@ -152,7 +152,7 @@
             }
             else
             {
-                cell.cameraName.text=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+                cell.cameraName.text=@"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
                 cell.userInteractionEnabled=YES;
                 cell.cameraName.enabled=YES;
@@ -163,12 +163,12 @@
             
             if (indexPath.row==0)
             {
-                cell.cameraName.text= @"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+                cell.cameraName.text= @"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1020-200"];
             }
             else
             {
-                cell.cameraName.text=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+                cell.cameraName.text=@"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
             }
             cell.userInteractionEnabled = NO;

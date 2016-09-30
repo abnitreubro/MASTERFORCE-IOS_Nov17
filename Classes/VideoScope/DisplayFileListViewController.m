@@ -55,13 +55,13 @@ static NSString * const reuseIdentifier = @"FileList";
     
     if (isP2P)
     {
-        self.title = @"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+        self.title = @"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
         picPathArray = [[NSMutableArray alloc] init];
         [self loadP2PCameraData];
     }
     else
     {
-        self.title = @"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+        self.title = @"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
         [self loadIPCameraData];
     }
 }

@@ -52,12 +52,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row==0)
     {
-        cell.cameraName.text= @"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+        cell.cameraName.text= @"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
         cell.cameraImage.image = [UIImage imageNamed:@"MX1020-200"];
     }
     else
     {
-        cell.cameraName.text=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
+        cell.cameraName.text=@"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
         cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
     }
     

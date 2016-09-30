@@ -164,7 +164,7 @@
     //----------------- Bar button for Camera and Video -----------------//
     
     
-    self.navigationItem.title=@"MX1020 Masterforce Wi-Fi Inspection Camera/Video";
+    self.navigationItem.title=@"MX1020 Masterforce™ Wi-Fi Inspection Camera/Video";
     self.navigationController.navigationItem.backBarButtonItem.title = @"";
     
     [self setUpScrolling];
