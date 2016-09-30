@@ -98,7 +98,6 @@
 		1917D2171CBBA6DF00E84B1D /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1917D1CC1CBBA6DF00E84B1D /* ShowImageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1917D21F1CBBB67B00E84B1D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1917D21E1CBBB67B00E84B1D /* AssetsLibrary.framework */; };
 		191D843C1CC49CDB0004014D /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 191D843B1CC49CDB0004014D /* MyHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		191D84D21CC60B370004014D /* Camera_Record_Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 191D84D11CC60B360004014D /* Camera_Record_Gray.png */; settings = {ASSET_TAGS = (); }; };
 		191D85261CC774880004014D /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 191D85251CC774880004014D /* VideoPlayer.m */; settings = {ASSET_TAGS = (); }; };
 		19707DE01CCF30A100919BB3 /* CameraPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19707DDF1CCF30A100919BB3 /* CameraPreviewViewController.m */; settings = {ASSET_TAGS = (); }; };
 		19707E4C1CD09A4F00919BB3 /* VKVideoPlayer_pause_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19707E4A1CD09A4F00919BB3 /* VKVideoPlayer_pause_big@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -113,6 +112,10 @@
 		19707E931CD868BC00919BB3 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19707E921CD868BC00919BB3 /* ListTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		19707E951CD8BEDC00919BB3 /* MX1020-200.png in Resources */ = {isa = PBXBuildFile; fileRef = 19707E941CD8BEDC00919BB3 /* MX1020-200.png */; settings = {ASSET_TAGS = (); }; };
 		19707E971CD8BEED00919BB3 /* MX1021-200.png in Resources */ = {isa = PBXBuildFile; fileRef = 19707E961CD8BEED00919BB3 /* MX1021-200.png */; settings = {ASSET_TAGS = (); }; };
+		1971B4701D9E27B70077503E /* Camera_Record_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 1971B46D1D9E27B70077503E /* Camera_Record_Green.png */; settings = {ASSET_TAGS = (); }; };
+		1971B4711D9E27B70077503E /* Camera_Record_Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 1971B46E1D9E27B70077503E /* Camera_Record_Gray.png */; settings = {ASSET_TAGS = (); }; };
+		1971B4761D9E28440077503E /* Camera_Snapshot_Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 1971B4751D9E28440077503E /* Camera_Snapshot_Gray.png */; settings = {ASSET_TAGS = (); }; };
+		1971B4781D9E28490077503E /* Camera_Snapshot_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 1971B4771D9E28490077503E /* Camera_Snapshot_Green.png */; settings = {ASSET_TAGS = (); }; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -333,7 +336,6 @@
 		1917D21E1CBBB67B00E84B1D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		191D843B1CC49CDB0004014D /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
 		191D843D1CC49CF80004014D /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
-		191D84D11CC60B360004014D /* Camera_Record_Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Record_Gray.png; sourceTree = "<group>"; };
 		191D85241CC774880004014D /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
 		191D85251CC774880004014D /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
 		19707DDE1CCF30A100919BB3 /* CameraPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraPreviewViewController.h; sourceTree = "<group>"; };
@@ -351,6 +353,10 @@
 		19707E921CD868BC00919BB3 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 		19707E941CD8BEDC00919BB3 /* MX1020-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MX1020-200.png"; sourceTree = "<group>"; };
 		19707E961CD8BEED00919BB3 /* MX1021-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MX1021-200.png"; sourceTree = "<group>"; };
+		1971B46D1D9E27B70077503E /* Camera_Record_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Record_Green.png; sourceTree = "<group>"; };
+		1971B46E1D9E27B70077503E /* Camera_Record_Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Record_Gray.png; sourceTree = "<group>"; };
+		1971B4751D9E28440077503E /* Camera_Snapshot_Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Snapshot_Gray.png; sourceTree = "<group>"; };
+		1971B4771D9E28490077503E /* Camera_Snapshot_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Snapshot_Green.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* P2PCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2PCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -767,6 +773,10 @@
 				19159BA01D2A1A8A009C2041 /* MASTERFORCE ICON 1024 x 1024.PNG */,
 				19707E8F1CD867A800919BB3 /* Square.png */,
 				19707E4E1CD09FEE00919BB3 /* pause_green.png */,
+				1971B46D1D9E27B70077503E /* Camera_Record_Green.png */,
+				1971B46E1D9E27B70077503E /* Camera_Record_Gray.png */,
+				1971B4771D9E28490077503E /* Camera_Snapshot_Green.png */,
+				1971B4751D9E28440077503E /* Camera_Snapshot_Gray.png */,
 				19707E811CD8630900919BB3 /* rightRotate.png */,
 				19707E891CD8672000919BB3 /* Plus 2.png */,
 				19707E8A1CD8672000919BB3 /* minus 1.png */,
@@ -774,7 +784,6 @@
 				19707E4F1CD09FEE00919BB3 /* playbottone.png */,
 				19707E961CD8BEED00919BB3 /* MX1021-200.png */,
 				19707E941CD8BEDC00919BB3 /* MX1020-200.png */,
-				191D84D11CC60B360004014D /* Camera_Record_Gray.png */,
 				1917D18A1CBBA6DE00E84B1D /* disSelect.png */,
 				1917D18B1CBBA6DE00E84B1D /* error.png */,
 				1917D18C1CBBA6DE00E84B1D /* error@2x.png */,
@@ -1001,6 +1010,7 @@
 				CC918615154520C4001D459B /* PlayView.xib in Resources */,
 				1917D1F31CBBA6DF00E84B1D /* reset.png in Resources */,
 				1917D2011CBBA6DF00E84B1D /* wifiCamera@2x_act.png in Resources */,
+				1971B4701D9E27B70077503E /* Camera_Record_Green.png in Resources */,
 				CCB227D01546448A0003AE49 /* CameraListCell.xib in Resources */,
 				CC87C45B154925020086B180 /* SearchListCell.xib in Resources */,
 				1874D80C1D3E1EBB00FAD3D2 /* Camera_Clicked.png in Resources */,
@@ -1032,11 +1042,12 @@
 				04AA96DB1653BB5C00E03320 /* PictureListViewController.xib in Resources */,
 				1917D1D31CBBA6DF00E84B1D /* Main.storyboard in Resources */,
 				04BAB30D165477A6005B09A5 /* PicListCell.xib in Resources */,
+				1971B4781D9E28490077503E /* Camera_Snapshot_Green.png in Resources */,
+				1971B4761D9E28440077503E /* Camera_Snapshot_Gray.png in Resources */,
 				04BAB31E1654956C005B09A5 /* PictureShowViewController.xib in Resources */,
 				19159BA11D2A1A8A009C2041 /* MASTERFORCE ICON 1024 x 1024.PNG in Resources */,
 				1874D80F1D3E1EBB00FAD3D2 /* Video_Start.png in Resources */,
 				1917D2001CBBA6DF00E84B1D /* wifiCamera@2x.png in Resources */,
-				191D84D21CC60B370004014D /* Camera_Record_Gray.png in Resources */,
 				19707E8D1CD8672000919BB3 /* minus 1.png in Resources */,
 				1917D2021CBBA6DF00E84B1D /* wifiCamera@3x.png in Resources */,
 				1917D1E91CBBA6DF00E84B1D /* error@2x.png in Resources */,
@@ -1047,6 +1058,7 @@
 				1874D80E1D3E1EBB00FAD3D2 /* Video_Recording.png in Resources */,
 				19707E971CD8BEED00919BB3 /* MX1021-200.png in Resources */,
 				04C0EAE3165B0D7300FD88D8 /* RecordListViewController.xib in Resources */,
+				1971B4711D9E27B70077503E /* Camera_Record_Gray.png in Resources */,
 				04C0EB15165B346100FD88D8 /* PlaybackViewController.xib in Resources */,
 				1874D80D1D3E1EBB00FAD3D2 /* Camera_NotClicked.png in Resources */,
 				04C0EB1C165BA42D00FD88D8 /* PicDirCell.xib in Resources */,
@@ -1277,8 +1289,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.reubro.menards;
 				PRODUCT_NAME = P2PCamera;
-				PROVISIONING_PROFILE = "daa951d1-2667-40b3-87c3-3f9f4454c448";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "daa951d1-2667-40b3-87c3-3f9f4454c448";
+				PROVISIONING_PROFILE = "cb6c3684-8207-496e-b21b-4e5450612ef9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "cb6c3684-8207-496e-b21b-4e5450612ef9";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7";
@@ -1335,7 +1347,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "daa951d1-2667-40b3-87c3-3f9f4454c448";
+				PROVISIONING_PROFILE = "cb6c3684-8207-496e-b21b-4e5450612ef9";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

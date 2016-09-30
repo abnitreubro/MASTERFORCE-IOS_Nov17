@@ -158,8 +158,9 @@
     btnRecord = [[UIBarButtonItem alloc] initWithCustomView:recButton];
     btnRecord.enabled=NO;
     
-    self.navigationItem.rightBarButtonItems = @[btnSnapshot,btnRecord];
-    
+//    self.navigationItem.rightBarButtonItems = @[btnSnapshot,btnRecord];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:btnSnapshot,btnRecord, nil];
+
     //----------------- Bar button for Camera and Video -----------------//
     
     

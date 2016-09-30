@@ -95,7 +95,9 @@ static NSData *_endMarkerData = nil;
     videoRecorderBtn = [[UIBarButtonItem alloc] initWithCustomView:recButton];
     videoRecorderBtn.enabled=NO;
     
-    self.navigationItem.rightBarButtonItems = @[cameraBtn,videoRecorderBtn];
+//    self.navigationItem.rightBarButtonItems = @[cameraBtn,videoRecorderBtn];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:cameraBtn,videoRecorderBtn, nil]];
     
     
     [self.view layoutIfNeeded];
@@ -113,11 +115,11 @@ static NSData *_endMarkerData = nil;
     [self setUpScrolling];
     
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnce:)];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnce:)];
     tap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tap];
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveImage:)];
+    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveImage:)];
     [self.view addGestureRecognizer:pan];
     
     [self.view bringSubviewToFront:self.bottomButtonView];
@@ -146,7 +148,6 @@ static NSData *_endMarkerData = nil;
         [UIView  animateWithDuration:.5 animations:^{
             [[self navigationController] setNavigationBarHidden:YES animated:YES];
             _bottomButtonView.alpha = 0;
-            
         }];
     }
     else
@@ -154,7 +155,6 @@ static NSData *_endMarkerData = nil;
         [UIView animateWithDuration:.5 animations:^{
             [[self navigationController] setNavigationBarHidden:NO animated:YES];
             _bottomButtonView.alpha = 1;
-            
         }];
     }
 }

@@ -156,10 +156,7 @@
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
                 cell.userInteractionEnabled=YES;
                 cell.cameraName.enabled=YES;
-                
             }
-            
-            
         }
         
         else{
@@ -174,13 +171,10 @@
                 cell.cameraName.text=@"MX1021 Masterforce Wi-Fi Inspection Camera/Video";
                 cell.cameraImage.image = [UIImage imageNamed:@"MX1021-200"];
             }
-            cell.userInteractionEnabled=NO;
-            cell.cameraName.enabled=NO;
-            
+            cell.userInteractionEnabled = NO;
+            cell.cameraName.enabled = NO;
         }
-        
     }
-    
     
     return cell;
 }
