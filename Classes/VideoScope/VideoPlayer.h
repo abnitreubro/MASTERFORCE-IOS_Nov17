@@ -10,11 +10,23 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Constant.h"
+#import "RecPathManagement.h"
 
 
-@interface VideoPlayer : UIViewController
+
+
+@protocol videoProtocol <NSObject>
+
+-(void) videoDeletedReloadDatas:(NSString *)itemName;
+
+
+@end
+
+
+
+@interface VideoPlayer : UIViewController<UIActionSheetDelegate>
 {
-    UIBarButtonItem *shareBtn;
+    UIBarButtonItem * shareBtn, * deleteBtn;
     IBOutlet UIImageView *videoImage;
     IBOutlet NSLayoutConstraint *imageHeightConstraint;
     IBOutlet UIView *imageContainingView;
@@ -33,6 +45,9 @@
     IBOutlet UIButton *playStopButton;
     
     BOOL isPlaying,isSliding;
+    
+    RecPathManagement *m_pRecPathMgt;
+
 }
 
 - (IBAction)movieSliderAction:(id)sender;
@@ -44,6 +59,15 @@
 
 
 @property (strong, nonatomic) NSString *strVideoPath;
+
+
+@property BOOL isP2P;
+@property NSString * date;
+@property NSString * picPath;
+
+@property (weak) id delegates;
+
+
 
 
 @end

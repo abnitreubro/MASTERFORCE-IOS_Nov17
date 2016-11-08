@@ -11,10 +11,10 @@
 @interface DisplayFileListViewController (){
     
     
-    NSMutableArray *allContentInFolder;
-    UIBarButtonItem*deleteBtn;
-    UIBarButtonItem *editButton;
-    UIBarButtonItem *doneButton;
+    NSMutableArray * allContentInFolder;
+    UIBarButtonItem * deleteBtn, * selectDeselectBtn;
+    UIBarButtonItem * editButton;
+    UIBarButtonItem * doneButton;
     
     BOOL isEditing;
     
@@ -22,7 +22,7 @@
     
     // for collection View animations
     NSTimer * collectionTimer;
-    NSMutableArray * newArray,*animatedIndexPaths,*thumbnailToDelete;
+    NSMutableArray * newArray,*animatedIndexPaths;
     int counter; // Counter for contents in file
     
     
@@ -90,7 +90,6 @@ static NSString * const reuseIdentifier = @"FileList";
         
         isEditing=NO;
         [arrayTodelete removeAllObjects];
-        [thumbnailToDelete removeAllObjects];
         [indexArrayTodelete removeAllObjects];
         [self makeAllViewEditable:NO];
     }
@@ -100,8 +99,22 @@ static NSString * const reuseIdentifier = @"FileList";
         doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editDoneButonAction:)] ;
         
         deleteBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButonAction:)] ;
+        
+        
+        UIImage * deSelectAllImage = [UIImage imageNamed:@"DeSelectAll"];
+        UIButton * deSelectAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [deSelectAllButton addTarget:self action:@selector(selectAllButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        deSelectAllButton.bounds = CGRectMake( 0, 0, 28, 28);
+        [deSelectAllButton setImage:deSelectAllImage forState:UIControlStateNormal];
+        
+        selectDeselectBtn = [[UIBarButtonItem alloc] initWithCustomView:deSelectAllButton];
+        
+        
+        
         deleteBtn.enabled=NO;
-        self.navigationItem.rightBarButtonItems = @[doneButton,deleteBtn];
+        self.navigationItem.rightBarButtonItems = @[doneButton,selectDeselectBtn,deleteBtn];
         isEditing=YES;
         [self makeAllViewEditable:YES];
     }
@@ -119,8 +132,83 @@ static NSString * const reuseIdentifier = @"FileList";
     UIActionSheet *actionSheet= [[UIActionSheet alloc]initWithTitle:@"Are you sure to delete?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Confirm" otherButtonTitles:nil, nil];
     
     [actionSheet showInView:self.view];
-    
 }
+
+
+
+
+
+
+-(void)selectAllButtonAction{
+    
+    if (arrayTodelete.count > 0) {
+        [self deSelectAll];
+    }
+    else{
+        [self selectAllImages];
+    }
+}
+
+
+
+
+-(void)selectAllImages{
+    
+    UIButton * button= (UIButton*)selectDeselectBtn.customView;
+    UIImage * selectAllImage = [UIImage imageNamed:@"SelectAll"];
+    [button setImage:selectAllImage forState:UIControlStateNormal];
+    
+    [indexArrayTodelete removeAllObjects];
+    [arrayTodelete removeAllObjects];
+    deleteBtn.enabled = YES;
+    
+    if (isP2P) {
+        for (int i = 0; i < picPathArray.count; i++) {
+            
+            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+            [indexArrayTodelete addObject:indexPath];
+            [arrayTodelete addObject:[picPathArray objectAtIndex:indexPath.row]];
+        }
+    }
+    else
+    {
+        for (int i = 0; i < allContentInFolder.count; i++) {
+            
+            NSIndexPath * indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+            [indexArrayTodelete addObject:indexPath];
+            [arrayTodelete addObject:[allContentInFolder objectAtIndex:indexPath.row]];
+        }
+    }
+    
+    [self.FileListCollectionView layoutIfNeeded];
+    [self.FileListCollectionView reloadData];
+
+//    [self.FileListCollectionView reloadItemsAtIndexPaths:indexArrayTodelete];
+}
+
+
+
+
+
+-(void)deSelectAll{
+    
+    UIButton * button= (UIButton*)selectDeselectBtn.customView;
+    UIImage * selectAllImage = [UIImage imageNamed:@"DeSelectAll"];
+    [button setImage:selectAllImage forState:UIControlStateNormal];
+
+    deleteBtn.enabled = NO;
+    [arrayTodelete removeAllObjects];
+
+    [self.FileListCollectionView layoutIfNeeded];
+    [self.FileListCollectionView reloadData];
+
+//    [self.FileListCollectionView reloadItemsAtIndexPaths:indexArrayTodelete];
+    [indexArrayTodelete removeAllObjects];
+}
+
+
+
+
 
 
 
@@ -143,7 +231,6 @@ static NSString * const reuseIdentifier = @"FileList";
             
             cell.ButtonSelected.hidden=NO;
             cell.ButtonSelected.image=[UIImage imageNamed:@"disSelect.png"];
-            
         }
     }
     else{
@@ -160,7 +247,6 @@ static NSString * const reuseIdentifier = @"FileList";
             
             cell.ButtonSelected.hidden=YES;
             cell.ButtonSelected.image=[UIImage imageNamed:@"disSelect.png"];
-            
         }
     }
 }
@@ -185,7 +271,6 @@ static NSString * const reuseIdentifier = @"FileList";
     
     allContentInFolder=[[NSMutableArray alloc]init];
     arrayTodelete=[[NSMutableArray alloc]init];
-    thumbnailToDelete = [NSMutableArray new];
     indexArrayTodelete=[[NSMutableArray alloc]init];
     
     [allContentInFolder addObjectsFromArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:dataPath error:NULL]];
@@ -222,8 +307,6 @@ static NSString * const reuseIdentifier = @"FileList";
     indexArrayTodelete=[[NSMutableArray alloc]init];
     datesArray = [[NSMutableArray alloc] init];
     arrayTodelete=[[NSMutableArray alloc]init];
-    thumbnailToDelete = [NSMutableArray new];
-    
     
     //[progressView removeFromSuperview];
     if (picPathArray!=nil) {
@@ -399,10 +482,13 @@ static NSString * const reuseIdentifier = @"FileList";
     cell.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3].CGColor;
     cell.layer.cornerRadius = 5;
     
-    
     cell.clipsToBounds = YES;
     cell.ThumbNailImageView.clipsToBounds = YES;
     
+    
+    
+    
+    /// Functionality Start here
     
     
     if (isP2P)
@@ -420,13 +506,11 @@ static NSString * const reuseIdentifier = @"FileList";
         
         if ([[strPath pathExtension] isEqualToString:@"mov"]||[[strPath pathExtension] isEqualToString:@"mp4"]||[[strPath pathExtension] isEqualToString:@"rec"]) // take thumbnail for videos // to reduce loading time next time the table view is scrolled.
         {
-            
-            
             cell.imagePlayButton.hidden=NO;
-            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
-            {
-                [indexStore addObject:indexPath];
-                
+//            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
+//            {
+//                [indexStore addObject:indexPath];
+            
                 NSURL * url = [NSURL fileURLWithPath: strPath];
                 AVURLAsset *asset1 = [[AVURLAsset alloc] initWithURL:url options:nil];
                 AVAssetImageGenerator *generate1 = [[AVAssetImageGenerator alloc] initWithAsset:asset1];
@@ -436,45 +520,44 @@ static NSString * const reuseIdentifier = @"FileList";
                 CGImageRef oneRef = [generate1 copyCGImageAtTime:time actualTime:NULL error:&err];
                 UIImage *one = [[UIImage alloc] initWithCGImage:oneRef];
                 
-                cell.ThumbNailImageView.image=one;
-                NSData* pictureData = UIImageJPEGRepresentation(one, .1); //JPEG conversion
-                if (pictureData == nil) {
-                    
-                    pictureData = [[NSData alloc] init];
-                }
-                
-                [storeThumbnails addObject:pictureData];
-                
-            }
-            else
-            {
-                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
-            }
+                cell.ThumbNailImageView.image = one;
+            
+//                NSData* pictureData = UIImageJPEGRepresentation(one, .1); //JPEG conversion
+//                if (pictureData == nil) {
+//                    
+//                    pictureData = [[NSData alloc] init];
+//                }
+//                
+//                [storeThumbnails addObject:pictureData];
+//                
+//            }
+//            else
+//            {
+//                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
+//            }
             
             AVURLAsset *avUrl = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:strPath]];
             CMTime timeTemp = [avUrl duration];
             int seconds = ceil(timeTemp.value/timeTemp.timescale);
             
-            cell.lblDurationSize.text=[self formattedTime:seconds];
-            
-            
+            cell.lblDurationSize.text=[self formattedTime:seconds];            
         }
         else
         {
             cell.imagePlayButton.hidden=YES;
             
-            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
-            {
-                [indexStore addObject:indexPath];
+//            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
+//            {
+//                [indexStore addObject:indexPath];
                 cell.ThumbNailImageView.image=[UIImage imageWithData:[NSData dataWithContentsOfFile:strPath]];
                 
-                [storeThumbnails addObject:[NSData dataWithContentsOfFile:strPath]];
-                
-            }
-            else
-            {
-                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
-            }
+//                [storeThumbnails addObject:[NSData dataWithContentsOfFile:strPath]];
+//                
+//            }
+//            else
+//            {
+//                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
+//            }
             
             unsigned long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:strPath error:nil] fileSize];
             float fileSizeKB = fileSize/1024;
@@ -524,18 +607,18 @@ static NSString * const reuseIdentifier = @"FileList";
         {
             
             
-            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
-            {
-                [indexStore addObject:indexPath];
+//            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
+//            {
+//                [indexStore addObject:indexPath];
                 cell.ThumbNailImageView.image=[UIImage imageWithData:[NSData dataWithContentsOfFile:savedImagePath]];
                 
-                [storeThumbnails addObject:[NSData dataWithContentsOfFile:savedImagePath]];
-                
-            }
-            else
-            {
-                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
-            }
+//                [storeThumbnails addObject:[NSData dataWithContentsOfFile:savedImagePath]];
+//                
+//            }
+//            else
+//            {
+//                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
+//            }
             
             
             
@@ -555,10 +638,10 @@ static NSString * const reuseIdentifier = @"FileList";
         {
             
             
-            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
-            {
-                [indexStore addObject:indexPath];
-                
+//            if (storeThumbnails.count <= newArray.count && ![indexStore containsObject:indexPath])
+//            {
+//                [indexStore addObject:indexPath];
+            
                 NSURL * url = [NSURL fileURLWithPath: savedImagePath];
                 AVURLAsset *asset1 = [[AVURLAsset alloc] initWithURL:url options:nil];
                 AVAssetImageGenerator *generate1 = [[AVAssetImageGenerator alloc] initWithAsset:asset1];
@@ -569,19 +652,19 @@ static NSString * const reuseIdentifier = @"FileList";
                 UIImage *one = [[UIImage alloc] initWithCGImage:oneRef];
                 
                 cell.ThumbNailImageView.image=one;
-                NSData* pictureData = UIImageJPEGRepresentation(one, .1); //JPEG conversion
-                
-                if (pictureData == nil) {
-                    
-                    pictureData = [[NSData alloc] init];
-                }
-                [storeThumbnails addObject:pictureData];
-                
-            }
-            else
-            {
-                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
-            }
+//                NSData* pictureData = UIImageJPEGRepresentation(one, .1); //JPEG conversion
+//                
+//                if (pictureData == nil) {
+//                    
+//                    pictureData = [[NSData alloc] init];
+//                }
+//                [storeThumbnails addObject:pictureData];
+//                
+//            }
+//            else
+//            {
+//                cell.ThumbNailImageView.image=[UIImage imageWithData:[storeThumbnails objectAtIndex:indexPath.row]];
+//            }
             
             cell.imagePlayButton.hidden=NO;
             
@@ -624,27 +707,27 @@ static NSString * const reuseIdentifier = @"FileList";
     else
         cell.ButtonSelected.hidden=YES;
     
-    // To make sure the animation appears only during the initial loading and not always which can be annoying.
-    if (![animatedIndexPaths containsObject:indexPath])
-    {
-        [animatedIndexPaths addObject:indexPath];
-        
-        cell.transform = CGAffineTransformMakeTranslation(0.0f, 200);
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.layer.shadowColor = [[UIColor blackColor]CGColor];
-        cell.layer.shadowOffset = CGSizeMake(10, 10);
-        cell.alpha = 0;
-        
-        //2. Define the final state (After the animation) and commit the animation
-        [UIView animateWithDuration:.8 delay:0.0 usingSpringWithDamping:.85 initialSpringVelocity:.8 options:0 animations:^{
-            
-            cell.transform = CGAffineTransformMakeTranslation(0.f, 0);
-            cell.alpha = 1;
-            cell.layer.shadowOffset = CGSizeMake(0, 0);
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
+//    // To make sure the animation appears only during the initial loading and not always which can be annoying.
+//    if (![animatedIndexPaths containsObject:indexPath])
+//    {
+//        [animatedIndexPaths addObject:indexPath];
+//        
+//        cell.transform = CGAffineTransformMakeTranslation(0.0f, 200);
+//        cell.backgroundColor = [UIColor whiteColor];
+//        cell.layer.shadowColor = [[UIColor blackColor]CGColor];
+//        cell.layer.shadowOffset = CGSizeMake(10, 10);
+//        cell.alpha = 0;
+//        
+//        //2. Define the final state (After the animation) and commit the animation
+//        [UIView animateWithDuration:.8 delay:0.0 usingSpringWithDamping:.85 initialSpringVelocity:.8 options:0 animations:^{
+//            
+//            cell.transform = CGAffineTransformMakeTranslation(0.f, 0);
+//            cell.alpha = 1;
+//            cell.layer.shadowOffset = CGSizeMake(0, 0);
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//    }
     
     
     return cell;
@@ -663,14 +746,12 @@ static NSString * const reuseIdentifier = @"FileList";
             if ([arrayTodelete containsObject:[picPathArray objectAtIndex:indexPath.row]]) {
                 
                 [indexArrayTodelete removeObject:indexPath];
-                [thumbnailToDelete removeObject:[storeThumbnails objectAtIndex:indexPath.row]];
                 [arrayTodelete removeObject:[picPathArray objectAtIndex:indexPath.row]];
                 cell.ButtonSelected.image=[UIImage imageNamed:@"disSelect.png"];
             }
             else{
                 //tkContact_checkBox
                 [indexArrayTodelete addObject:indexPath];
-                [thumbnailToDelete addObject:[storeThumbnails objectAtIndex:indexPath.row]];
                 [arrayTodelete addObject:[picPathArray objectAtIndex:indexPath.row]];
                 cell.ButtonSelected.image=[UIImage imageNamed:@"tkContact_checkBox.png"];
             }
@@ -700,6 +781,10 @@ static NSString * const reuseIdentifier = @"FileList";
                 
                 ShowImageViewController * showImageViewController = (ShowImageViewController *)[storyVC instantiateViewControllerWithIdentifier:@"ShowImageViewController"];
                 showImageViewController.strImagePath=strPath;
+                showImageViewController.isP2P = YES;
+                showImageViewController.date = [datesArray objectAtIndex:indexPath.row];
+                showImageViewController.picPath = [picPathArray objectAtIndex:indexPath.row];
+                showImageViewController.delegates = self;
                 
                 [self.navigationController pushViewController:showImageViewController animated:YES];
             }
@@ -709,8 +794,14 @@ static NSString * const reuseIdentifier = @"FileList";
                 
                 VideoPlayer * playRecordedVideoViewController = (VideoPlayer *)[storyVC instantiateViewControllerWithIdentifier:@"VideoPlayer"];
                 playRecordedVideoViewController.strVideoPath=strPath;
-                [self.navigationController pushViewController:playRecordedVideoViewController animated:YES];
+                playRecordedVideoViewController.isP2P = YES;
+                playRecordedVideoViewController.date = [datesArray objectAtIndex:indexPath.row];
+                playRecordedVideoViewController.picPath = [picPathArray objectAtIndex:indexPath.row];
+                playRecordedVideoViewController.delegates = self;
                 
+                
+                
+                [self.navigationController pushViewController:playRecordedVideoViewController animated:YES];
             }
         }
     }
@@ -725,15 +816,12 @@ static NSString * const reuseIdentifier = @"FileList";
             if ([arrayTodelete containsObject:[allContentInFolder objectAtIndex:indexPath.row]]) {
                 
                 [indexArrayTodelete removeObject:indexPath];
-                // [thumbnailToDelete removeObjectAtIndex:indexPath.row];
-                [thumbnailToDelete removeObject:[storeThumbnails objectAtIndex:indexPath.row]];
                 [arrayTodelete removeObject:[allContentInFolder objectAtIndex:indexPath.row]];
                 cell.ButtonSelected.image=[UIImage imageNamed:@"disSelect.png"];
             }
             else{
                 //tkContact_checkBox
                 [indexArrayTodelete addObject:indexPath];
-                [thumbnailToDelete addObject:[storeThumbnails objectAtIndex:indexPath.row]];
                 [arrayTodelete addObject:[allContentInFolder objectAtIndex:indexPath.row]];
                 cell.ButtonSelected.image=[UIImage imageNamed:@"tkContact_checkBox.png"];
             }
@@ -759,7 +847,10 @@ static NSString * const reuseIdentifier = @"FileList";
                 
                 ShowImageViewController * showImageViewController = (ShowImageViewController *)[storyVC instantiateViewControllerWithIdentifier:@"ShowImageViewController"];
                 showImageViewController.strImagePath=savedImagePath;
-                
+                showImageViewController.isP2P = NO;
+                showImageViewController.picPath = [allContentInFolder objectAtIndex:indexPath.row];
+                showImageViewController.delegates = self;
+
                 [self.navigationController pushViewController:showImageViewController animated:YES];
             }
             else
@@ -767,7 +858,11 @@ static NSString * const reuseIdentifier = @"FileList";
                 UIStoryboard * storyVC = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 
                 VideoPlayer * playRecordedVideoViewController = (VideoPlayer *)[storyVC instantiateViewControllerWithIdentifier:@"VideoPlayer"];
-                playRecordedVideoViewController.strVideoPath=savedImagePath;
+                playRecordedVideoViewController.strVideoPath = savedImagePath;
+                playRecordedVideoViewController.isP2P = NO;
+                playRecordedVideoViewController.picPath = [allContentInFolder objectAtIndex:indexPath.row];
+                playRecordedVideoViewController.delegates = self;
+                
                 [self.navigationController pushViewController:playRecordedVideoViewController animated:YES];
             }
         }
@@ -791,35 +886,26 @@ static NSString * const reuseIdentifier = @"FileList";
             
             for (NSString *itemname in arrayTodelete) {
                 
-                
-                [storeThumbnails removeObject:[thumbnailToDelete objectAtIndex:count]];
                 [indexStore removeLastObject];
-                
                 
                 if ([[itemname pathExtension] isEqualToString:@"mov"]||[[itemname pathExtension] isEqualToString:@"mp4"]||[[itemname pathExtension] isEqualToString:@"rec"])
                     [m_pRecPathMgt RemovePath:@"OBJ-002864-STBZD" Date:[datesArray objectAtIndex:[[indexArrayTodelete objectAtIndex:count] row]] Path:itemname] ;
                 else
                     [m_pPicPathMgt RemovePicPath:@"OBJ-002864-STBZD" PicDate:[datesArray objectAtIndex:[[indexArrayTodelete objectAtIndex:count] row]] PicPath:itemname] ;
+                
                 count = count +1;
                 
                 [picPathArray removeObject:itemname];
                 [newArray removeLastObject];
-                [animatedIndexPaths removeLastObject];
-                
+//                [animatedIndexPaths removeLastObject];
             }
-            
             
             [storeThumbnails removeAllObjects];
             [indexStore removeAllObjects];
-            [thumbnailToDelete removeAllObjects];
             
             
-            NSArray * tempArray = [newArray copy];
-            [newArray removeAllObjects];
-            [self.FileListCollectionView reloadData];
             
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [newArray addObjectsFromArray:tempArray];
                 [self.FileListCollectionView layoutIfNeeded];
                 [self.FileListCollectionView reloadData];
             }];
@@ -840,10 +926,9 @@ static NSString * const reuseIdentifier = @"FileList";
                 NSError *error;
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-                NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"imageFolder1"]]];
-                NSString *savedImagePath = [dataPath stringByAppendingPathComponent:itemname];
-                
+                NSString * documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+                NSString * dataPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"imageFolder1"]]];
+                NSString * savedImagePath = [dataPath stringByAppendingPathComponent:itemname];
                 
                 [[NSFileManager defaultManager] removeItemAtPath:savedImagePath error:&error]; //Will delete file
                 
@@ -851,19 +936,14 @@ static NSString * const reuseIdentifier = @"FileList";
                 {
                     [allContentInFolder removeObject:itemname];
                     [newArray removeLastObject];
-                    [animatedIndexPaths removeLastObject];
-                    NSLog(@"I am Count %d and ount2 %ld and idexArray count %lu",count,(long)[[indexArrayTodelete objectAtIndex:count] row],(unsigned long)storeThumbnails.count);
-                    //[storeThumbnails removeObjectAtIndex:[[indexArrayTodelete objectAtIndex:count] row]];
-                    [storeThumbnails removeObject:[thumbnailToDelete objectAtIndex:count]];
-                    
+//                    [animatedIndexPaths removeLastObject];
+
                     [indexStore removeObject:[indexArrayTodelete objectAtIndex:count]];
                     count = count +1;
-                    
                 }
-                
                 else{
                     
-                    UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                     [alert show];
                     return;
                 }
@@ -871,7 +951,6 @@ static NSString * const reuseIdentifier = @"FileList";
             
             [storeThumbnails removeAllObjects];
             [indexStore removeAllObjects];
-            [thumbnailToDelete removeAllObjects];
 
             NSArray * tempArray = [newArray copy];
             [newArray removeAllObjects];
@@ -888,9 +967,7 @@ static NSString * const reuseIdentifier = @"FileList";
             if (allContentInFolder.count == 0) {
                 [editButton setEnabled:NO];
             }
-
         }
-        
     }
 }
 
@@ -912,6 +989,54 @@ static NSString * const reuseIdentifier = @"FileList";
         return [NSString stringWithFormat:@"%02d:%02d:%02d",hours, minutes, seconds];
 }
 
+
+#pragma mark - Custom Delegates Methods
+
+// While an image is deleted
+-(void) deletedPleaseReloadTheImages:(NSString *)itemName
+{
+    if (isP2P) {
+        [picPathArray removeObject:itemName];
+        newArray = [[NSMutableArray alloc] init];
+        [newArray addObjectsFromArray:[picPathArray copy]];
+    }
+    else{
+        [allContentInFolder removeObject:itemName];
+        newArray = [[NSMutableArray alloc] init];
+        [newArray addObjectsFromArray:[allContentInFolder copy]];
+    }
+    
+    [storeThumbnails removeAllObjects];
+    [indexStore removeAllObjects];
+
+    [self.FileListCollectionView layoutIfNeeded];
+    [self.FileListCollectionView reloadData];
+}
+
+
+
+
+
+// While a vido is deleted
+-(void) videoDeletedReloadDatas:(NSString *)itemName
+{
+    if (isP2P) {
+        [picPathArray removeObject:itemName];
+        newArray = [[NSMutableArray alloc] init];
+        [newArray addObjectsFromArray:[picPathArray copy]];
+    }
+    else{
+        [allContentInFolder removeObject:itemName];
+        newArray = [[NSMutableArray alloc] init];
+        [newArray addObjectsFromArray:[allContentInFolder copy]];
+    }
+    
+    [storeThumbnails removeAllObjects];
+    [indexStore removeAllObjects];
+    
+    [self.FileListCollectionView layoutIfNeeded];
+    [self.FileListCollectionView reloadData];
+}
 
 
 

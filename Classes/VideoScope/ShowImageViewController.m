@@ -10,12 +10,16 @@
 
 @interface ShowImageViewController ()
 {
-    UIBarButtonItem *shareBtn;
+    UIBarButtonItem * shareBtn, * deleteBtn;
 }
 
 @end
 
 @implementation ShowImageViewController
+@synthesize isP2P;
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,13 +31,13 @@
     
     if (attrs != nil)
     {
-        NSDate *date = (NSDate*)[attrs objectForKey: NSFileCreationDate];
+        NSDate * date = (NSDate*)[attrs objectForKey: NSFileCreationDate];
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat: @"MMM dd, yyyy, hh:mm:ss a"];
         
-        NSString *strDate = [formatter stringFromDate:date]; // Convert date to string
-        self.title=strDate;
+        NSString * strDate = [formatter stringFromDate:date]; // Convert date to string
+        self.title = strDate;
     }
     
     // Set Background color
@@ -52,7 +56,10 @@
     
     shareBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonAction:)] ;
     
-    self.navigationItem.rightBarButtonItems = @[shareBtn];
+    deleteBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButonAction:)] ;
+
+    
+    self.navigationItem.rightBarButtonItems = @[deleteBtn,shareBtn];
     
     
     interfaceImage.image=[UIImage imageWithData:[NSData dataWithContentsOfFile:self.strImagePath]];
@@ -164,6 +171,39 @@
 
 
 
+#pragma mark - Delete
+
+-(void)deleteButonAction:(id)sender{
+    
+    UIActionSheet *actionSheet= [[UIActionSheet alloc]initWithTitle:@"Are you sure to delete?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Confirm" otherButtonTitles:nil, nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
+    if (buttonIndex==0) {
+        if (isP2P)
+        {
+            m_pPicPathMgt = [[PicPathManagement alloc] init];
+
+            [m_pPicPathMgt RemovePicPath:@"OBJ-002864-STBZD" PicDate:_date PicPath:_picPath];
+        }
+        else
+        {
+            NSError *error;
+            [[NSFileManager defaultManager] removeItemAtPath:self.strImagePath error:&error];
+        }
+        
+        [_delegates deletedPleaseReloadTheImages:_picPath];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+}
 
 
 

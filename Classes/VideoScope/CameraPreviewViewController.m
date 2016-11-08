@@ -443,15 +443,11 @@ static NSData *_endMarkerData = nil;
         
         
     }
-//    UIButton *button= (UIButton*)cameraBtn.customView;
-//    UIImage *recorderImage = [UIImage imageNamed:@"Camera_NotClicked"];
-//    [button setImage:recorderImage forState:UIControlStateNormal];
 
+    
     [self changeButtonImageForCaptureImage];
 
-//    [CustomToast showWithText:@"Snapshot saved successfully"
-//                    superView:interfaceScrollView
-//                    bLandScap:NO];
+
     mesageLabel.hidden = NO;
     mesageLabel.alpha = 1;
     mesageLabel.text = @"Snapshot saved successfully";
@@ -644,7 +640,6 @@ static NSData *_endMarkerData = nil;
         [recordingTimerVideo invalidate];
         recordingTimerVideo=nil;
         
-        NSLog(@"numberOfScreenshots is %@",numberOfScreenshots);
         
         isRecording=NO;
         
@@ -965,13 +960,16 @@ static NSData *_endMarkerData = nil;
                         }
                         else{
                             
-                            mesageLabel.hidden = NO;
-                            mesageLabel.alpha = 1;
-                            mesageLabel.text = @"Video saved successfully";
-                            
-                            [UIView animateWithDuration:5.0 animations:^{
+                            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                                 
-                                mesageLabel.alpha = 0;
+                                mesageLabel.hidden = NO;
+                                mesageLabel.alpha = 1;
+                                mesageLabel.text = @"Video saved successfully";
+                                
+                                [UIView animateWithDuration:5.0 animations:^{
+                                    
+                                    mesageLabel.alpha = 0;
+                                }];
                             }];
                             
 //                            [self performSelectorOnMainThread:@selector(showVideoSuccessMessage) withObject:nil waitUntilDone:NO];
@@ -1497,7 +1495,7 @@ static NSData *_endMarkerData = nil;
             return YES;
         }
     }
-    NSLog(@"memory=%@",memory);
+//    NSLog(@"memory=%@",memory);
     
     
     return NO;

@@ -463,14 +463,11 @@
     
     timeNumber++;
     NSString *strTime=[self getRecordTime:timeNumber];
-    NSLog(@"%@",strTime);
+
+    
     labelRecording.text=[NSString stringWithFormat:@"%@%@",NSLocalizedStringFromTable(@"play_recording", @STR_LOCALIZED_FILE_NAME, nil),strTime];
     //    return;
     btnUpdateTime.title=[NSString stringWithFormat:@"Recording...%d",timeNumber];
-    
-    NSLog(@"startRecordTime  timeNumber=%d",timeNumber);
-    
-    NSLog(@"set Time%ld",[[[NSUserDefaults standardUserDefaults] valueForKey:@"recordingTime"] integerValue]);
     
     if (timeNumber==([[[NSUserDefaults standardUserDefaults] valueForKey:@"recordingTime"] integerValue])*60) {
         
@@ -674,14 +671,8 @@
 {
     UIImage *img = (UIImage*)data;
     
-    NSLog(@"Updated ImgView h%f",img.size.height);
-    NSLog(@"Updated ImgView w%f",img.size.width);
-    
     imgView.image = img;
     
-    
-    NSLog(@"Updated height%f",imgView.frame.size.height);
-    NSLog(@"Updated width%f",imgView.frame.size.width);
     [img release];
     
     //show timestamp
@@ -1213,7 +1204,7 @@
             return YES;
         }
     }
-    NSLog(@"memory=%@",memory);
+//    NSLog(@"memory=%@",memory);
     
     [self performSelectorOnMainThread:@selector(showMemory:) withObject:memory waitUntilDone:NO];
     
@@ -1298,8 +1289,6 @@
         
         [recordingTimerVideo invalidate];
         recordingTimerVideo=nil;
-        
-        NSLog(@"numberOfScreenshots is %@",numberOfScreenshots);
         
         isRecording=NO;
         
@@ -1659,14 +1648,7 @@
                                 tempDetailsArray = [[NSMutableArray alloc] initWithObjects:@"Success",audioOrVideo,@"p2p", nil];
                                 [[NSUserDefaults standardUserDefaults] setValue:tempDetailsArray forKey:@"recording"];
                                 
-                                
-                                
-                                NSLog(@"%@", self.navigationController.viewControllers);
                                 if ([self.navigationController.viewControllers containsObject:self]) {
-                                    
-//                                    [CustomToast showWithText:@"Video saved successfully"
-//                                                    superView:self.interfaceScrollView
-//                                                    bLandScap:NO];
 
                                     messageLabel.hidden = NO;
                                     messageLabel.alpha = 1;
@@ -1676,12 +1658,8 @@
                                         
                                         messageLabel.alpha = 0;
                                     }];
-
                                 }
-
-                                
                             }];
-//                            [self performSelectorOnMainThread:@selector(showVideoSuccessMessage) withObject:nil waitUntilDone:NO];
                         }
                     } else
                         
@@ -1709,24 +1687,9 @@
 }
 
 
--(void)showVideoSuccessMessage{
-    
-    tempDetailsArray = [[NSMutableArray alloc] initWithObjects:@"Success",audioOrVideo,@"p2p", nil];
-    [[NSUserDefaults standardUserDefaults] setValue:tempDetailsArray forKey:@"recording"];
-    
-    
-    
-    NSLog(@"%@", self.navigationController.viewControllers);
-    if ([self.navigationController.viewControllers containsObject:self]) {
-        
-        [CustomToast showWithText:@"Video saved successfully"
-                        superView:self.interfaceScrollView
-                        bLandScap:NO];
-    }
-}
+
 
 -(CVPixelBufferRef) pixelBufferFromCGImage: (CGImageRef) image
-
 {
     // This again was just our utility class for the height & width of the
     // incoming video (640 height x 480 width)
@@ -1749,8 +1712,6 @@
                                           height, kCVPixelFormatType_32ARGB, (__bridge CFDictionaryRef) options,
                                           
                                           &pxbuffer);
-    
-    
     
     NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
     
@@ -1787,6 +1748,8 @@
 
 
 
+
+
 #pragma mark- end
 
 #pragma mark- Audio Capture Functionality
@@ -1799,11 +1762,9 @@
     [formatter setDateFormat: @"yyyyMMddHHmmss"];
     NSString *strDate = [formatter stringFromDate:[NSDate date]]; // Convert date to string
     
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",@""]];
-    
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])//Check
     {
@@ -1811,7 +1772,6 @@
     }
     
     NSString *savedImagePath = [dataPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4a",strDate]];
-    
     
     [[NSUserDefaults standardUserDefaults] setObject:savedImagePath forKey:@"audio"];
     
@@ -1864,11 +1824,11 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // [fileManager removeItemAtPath:[AudioURl path]  error:NULL];
     
-    NSLog(@"savedImagePathTemp is %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"audio"]);
+//    NSLog(@"savedImagePathTemp is %@",[[NSUserDefaults standardUserDefaults] valueForKey:@"audio"]);
     
     AudioURlP2P=[NSURL fileURLWithPath:[[NSUserDefaults standardUserDefaults] valueForKey:@"audio"]];
     
-    NSLog(@"AudioURlP2P is %@",AudioURlP2P);
+//    NSLog(@"AudioURlP2P is %@",AudioURlP2P);
     
     AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:AudioURlP2P options:nil];
     CMTimeRange audio_timeRange = CMTimeRangeMake(kCMTimeZero, audioAsset.duration);
@@ -1958,15 +1918,8 @@
                  tempDetailsArray = [[NSMutableArray alloc] initWithObjects:@"Success",audioOrVideo,@"p2p", nil];
                  [[NSUserDefaults standardUserDefaults] setValue:tempDetailsArray forKey:@"recording"];
                  
-                 
-                 
-                 NSLog(@"%@", self.navigationController.viewControllers);
                  if ([self.navigationController.viewControllers containsObject:self]) {
                      
-//                     [CustomToast showWithText:@"Video saved successfully"
-//                                     superView:self.interfaceScrollView
-//                                     bLandScap:NO];
-
                      messageLabel.hidden = NO;
                      messageLabel.alpha = 1;
                      messageLabel.text = @"Video saved successfully";
@@ -1975,12 +1928,8 @@
                          
                          messageLabel.alpha = 0;
                      }];
-
                  }
-                 
-                 
              }];
-//             [self performSelectorOnMainThread:@selector(showVideoSuccessMessage) withObject:nil waitUntilDone:NO];
          });
      }
      ];
@@ -2090,13 +2039,6 @@
     imgView.frame = _interfaceScrollView.frame;
     containerCiew.frame = _interfaceScrollView.frame;
     
-    //    imgView.center = _interfaceScrollView.center;
-    NSLog(@"_interfaceScrollView w:%f",_interfaceScrollView.frame.size.width);
-    NSLog(@"_interfaceScrollView h:%f",_interfaceScrollView.frame.size.height);
-    NSLog(@"imgView w:%f",imgView.frame.size.width);
-    NSLog(@"imgView h:%f",imgView.frame.size.height);
-    NSLog(@"self.view w:%f",self.view.frame.size.width);
-    NSLog(@"self.view h:%f",self.view.frame.size.height);
 }
 
 

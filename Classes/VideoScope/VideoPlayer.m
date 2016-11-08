@@ -10,16 +10,21 @@
 
 @implementation VideoPlayer
 
+@synthesize isP2P;
+
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     
     shareBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonAction:)] ;
     
-    self.navigationItem.rightBarButtonItems = @[shareBtn];
+    deleteBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteVideoButonAction:)] ;
+    
+    self.navigationItem.rightBarButtonItems = @[deleteBtn,shareBtn];
+    
     
     [self.view layoutIfNeeded];
-
     
     // Fetch thumbnail to display
     
@@ -142,15 +147,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//        if (!self.navigationController.navigationBarHidden)
-//        {
-//            [UIView  animateWithDuration:.5 animations:^{
-//                [[self navigationController] setNavigationBarHidden:YES animated:YES];
-//                controlsView.alpha = 0;
-//            }];
-//        }
-//    });
+
 }
 
 
@@ -361,6 +358,48 @@
     [self playerFinishedPlaying];
 
 }
+
+
+
+
+
+#pragma mark - Delete
+
+-(void)deleteVideoButonAction:(id)sender{
+    
+    UIActionSheet *actionSheet= [[UIActionSheet alloc]initWithTitle:@"Are you sure to delete?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Confirm" otherButtonTitles:nil, nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    NSLog(@"%ld",(long)buttonIndex);
+    
+    if (buttonIndex==0) {
+        if (isP2P)
+        {
+            m_pRecPathMgt  = [[RecPathManagement alloc] init];
+
+            [m_pRecPathMgt RemovePath:@"OBJ-002864-STBZD" Date:_date Path:_picPath] ;
+        }
+        else
+        {
+            NSError *error;
+            [[NSFileManager defaultManager] removeItemAtPath:self.strVideoPath error:&error];
+        }
+        
+        [_delegates videoDeletedReloadDatas:_picPath];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+}
+
+
+
 
 
 
