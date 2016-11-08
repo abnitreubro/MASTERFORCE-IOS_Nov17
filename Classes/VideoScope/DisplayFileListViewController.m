@@ -16,7 +16,7 @@
     UIBarButtonItem * editButton;
     UIBarButtonItem * doneButton;
     
-    BOOL isEditing;
+    BOOL isEditing, isSelectAll;
     
     NSMutableArray * arrayTodelete,*indexArrayTodelete, * datesArray;
     
@@ -64,6 +64,8 @@ static NSString * const reuseIdentifier = @"FileList";
         self.title = @"MX1021 Masterforce™ Wi-Fi Inspection Camera/Video";
         [self loadIPCameraData];
     }
+    
+    isSelectAll = NO;
 }
 
 
@@ -92,6 +94,7 @@ static NSString * const reuseIdentifier = @"FileList";
         [arrayTodelete removeAllObjects];
         [indexArrayTodelete removeAllObjects];
         [self makeAllViewEditable:NO];
+        isSelectAll = NO;
     }
     
     else{
@@ -111,7 +114,7 @@ static NSString * const reuseIdentifier = @"FileList";
         
         selectDeselectBtn = [[UIBarButtonItem alloc] initWithCustomView:deSelectAllButton];
         
-        
+        isSelectAll = NO;
         
         deleteBtn.enabled=NO;
         self.navigationItem.rightBarButtonItems = @[doneButton,selectDeselectBtn,deleteBtn];
@@ -141,7 +144,15 @@ static NSString * const reuseIdentifier = @"FileList";
 
 -(void)selectAllButtonAction{
     
-    if (arrayTodelete.count > 0) {
+//    if (arrayTodelete.count > 0) {
+//        [self deSelectAll];
+//    }
+//    else{
+//        [self selectAllImages];
+//    }
+    
+    
+    if (isSelectAll) { // if it is already all selected then deselect all.
         [self deSelectAll];
     }
     else{
@@ -153,6 +164,8 @@ static NSString * const reuseIdentifier = @"FileList";
 
 
 -(void)selectAllImages{
+    
+    isSelectAll = YES;
     
     UIButton * button= (UIButton*)selectDeselectBtn.customView;
     UIImage * selectAllImage = [UIImage imageNamed:@"SelectAll"];
@@ -192,6 +205,8 @@ static NSString * const reuseIdentifier = @"FileList";
 
 -(void)deSelectAll{
     
+    isSelectAll = NO;
+
     UIButton * button= (UIButton*)selectDeselectBtn.customView;
     UIImage * selectAllImage = [UIImage imageNamed:@"DeSelectAll"];
     [button setImage:selectAllImage forState:UIControlStateNormal];
@@ -756,6 +771,21 @@ static NSString * const reuseIdentifier = @"FileList";
                 cell.ButtonSelected.image=[UIImage imageNamed:@"tkContact_checkBox.png"];
             }
             
+            
+            if (arrayTodelete.count == picPathArray.count) {
+                isSelectAll = YES;
+                UIButton * button= (UIButton*)selectDeselectBtn.customView;
+                UIImage * selectAllImage = [UIImage imageNamed:@"SelectAll"];
+                [button setImage:selectAllImage forState:UIControlStateNormal];
+
+            }
+            else{
+                isSelectAll = NO;
+                UIButton * button= (UIButton*)selectDeselectBtn.customView;
+                UIImage * selectAllImage = [UIImage imageNamed:@"DeSelectAll"];
+                [button setImage:selectAllImage forState:UIControlStateNormal];
+            }
+            
             if (arrayTodelete.count>0)
                 deleteBtn.enabled=YES;
             
@@ -824,6 +854,20 @@ static NSString * const reuseIdentifier = @"FileList";
                 [indexArrayTodelete addObject:indexPath];
                 [arrayTodelete addObject:[allContentInFolder objectAtIndex:indexPath.row]];
                 cell.ButtonSelected.image=[UIImage imageNamed:@"tkContact_checkBox.png"];
+            }
+            
+            if (arrayTodelete.count == allContentInFolder.count) {
+                isSelectAll = YES;
+                UIButton * button= (UIButton*)selectDeselectBtn.customView;
+                UIImage * selectAllImage = [UIImage imageNamed:@"SelectAll"];
+                [button setImage:selectAllImage forState:UIControlStateNormal];
+                
+            }
+            else{
+                isSelectAll = NO;
+                UIButton * button= (UIButton*)selectDeselectBtn.customView;
+                UIImage * selectAllImage = [UIImage imageNamed:@"DeSelectAll"];
+                [button setImage:selectAllImage forState:UIControlStateNormal];
             }
             
             if (arrayTodelete.count>0)
